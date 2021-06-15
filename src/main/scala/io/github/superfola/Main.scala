@@ -4,18 +4,24 @@ import io.github.superfola.types._
 
 object Main extends App {
   def create: Tree[Int] =
-    Node[Int](
+    Node(
       Operators.add,
-      left = Node(
+      Node(
         Operators.sub,
-        Leaf(1),
-        Leaf(4)
+        Leaf(4),
+        Leaf(3)
       ),
-      right = Leaf(2)
+      Node(
+        Operators.mul,
+        Leaf(3),
+        Leaf(2)
+      )
     )
 
   val tree: Tree[Int] = create
 
   println(tree)
   println(tree.computed)
+  println(tree.reduce)
+  println(tree.reduce.reduce)
 }
