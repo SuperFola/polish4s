@@ -1,8 +1,5 @@
 package io.github.superfola.types
 
-import scala.math.Numeric
-import scala.math.Numeric.Implicits._
-
 final case class Operator(name: String, functor: (Double, Double) => Double) {
   override def toString: String = s"Operator($name)"
 }

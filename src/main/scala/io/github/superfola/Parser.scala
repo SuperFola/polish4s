@@ -11,7 +11,7 @@ final case class TokenOperator(value: Operator) extends Token
 final case class PartialTree(tree: Tree, rest: List[Token])
 
 object Parser {
-  def tokensListToTree(tokens: List[Token]): Option[PartialTree] = {
+  def tokensListToTree(tokens: List[Token]): Option[PartialTree] =
     tokens match {
       case head :: tail =>
         head match {
@@ -27,7 +27,6 @@ object Parser {
         }
       case Nil => None
     }
-  }
 
   def apply(source: String): Option[Tree] =
     source.trim

@@ -1,7 +1,5 @@
 package io.github.superfola.types
 
-import scala.math.Numeric
-
 sealed trait Tree {
   def computed: Double
   def reduce: Tree
@@ -40,7 +38,7 @@ final case class Node(op: Operator, left: Tree, right: Tree) extends Tree {
     left.length + right.length
 
   override def depth: Int =
-    1 + scala.math.max(left.depth, right.depth)
+    1 + math.max(left.depth, right.depth)
 
   override def isTerminal: Boolean = false
 

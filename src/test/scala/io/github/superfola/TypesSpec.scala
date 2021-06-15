@@ -43,7 +43,7 @@ class TypesSpec extends AnyFlatSpec with Matchers {
     smallTree.depth should be(2)
   }
   it should "be evaluated to (1 - 0)" in {
-    smallTree.toString should be("(1 - 0)")
+    smallTree.toString should be("(1.0 - 0.0)")
   }
   it should "be reduced to 1" in {
     smallTree.reduce should be(Leaf(1))
@@ -54,7 +54,7 @@ class TypesSpec extends AnyFlatSpec with Matchers {
     bigTree.length should be(4)
   }
   it should "be evaluated to ((4 - 3) + (3 * 2))" in {
-    bigTree.toString should be("((4 - 3) + (3 * 2))")
+    bigTree.toString should be("((4.0 - 3.0) + (3.0 * 2.0))")
   }
   it should "have a value of 7" in {
     bigTree.computed should be(7)
@@ -73,6 +73,6 @@ class TypesSpec extends AnyFlatSpec with Matchers {
   }
 
   "A big tree" should "have a prefix notation of (+ (- 4 3) (* 3 2))" in {
-    bigTree.toPrefixNotation should be("(+ (- 4 3) (* 3 2))")
+    bigTree.toPrefixNotation should be("(+ (- 4.0 3.0) (* 3.0 2.0))")
   }
 }

@@ -3,8 +3,6 @@ package io.github.superfola
 import cats.effect.{ExitCode, IO, IOApp}
 import io.github.superfola.types.{Leaf, Node, Tree}
 
-import scala.util.chaining.scalaUtilChainingOps
-
 object Main extends IOApp {
   def reduceToEnd(tree: Tree, depth: Int = 0): IO[Unit] =
     tree match {
