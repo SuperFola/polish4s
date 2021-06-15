@@ -12,8 +12,6 @@ final case class PartialTree(tree: Tree, rest: List[Token])
 
 object Parser {
   def tokensListToTree(tokens: List[Token]): Option[PartialTree] = {
-    println(s"rec: $tokens")
-
     tokens match {
       case head :: tail =>
         head match {
@@ -22,10 +20,8 @@ object Parser {
             tokensListToTree(tail)
               .flatMap { case PartialTree(leftTree, rest) =>
                 tokensListToTree(rest)
-                  .map { case PartialTree(rightTree, _) =>
-                    val pt = PartialTree(Node(value, leftTree, rightTree), Nil)
-                    println(s"computed: $pt")
-                    pt
+                  .map { case PartialTree(rightTree, rest) =>
+                    PartialTree(Node(value, leftTree, rightTree), rest)
                   }
               }
         }
