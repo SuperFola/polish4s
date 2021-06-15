@@ -14,11 +14,11 @@ final case class Leaf[A: Numeric](value: A) extends Tree[A] {
 
   override def reduce: Tree[A] = this
 
-  override def toString: String = value.toString
-
   override def depth: Int = 1
 
   override def isTerminal: Boolean = true
+
+  override def toString: String = value.toString
 }
 
 final case class Node[A: Numeric](op: Operator[A], left: Tree[A], right: Tree[A]) extends Tree[A] {
@@ -31,10 +31,10 @@ final case class Node[A: Numeric](op: Operator[A], left: Tree[A], right: Tree[A]
       Node[A](op, left.reduce, right.reduce)
   }
 
-  override def toString: String = s"($left ${op.name} $right)"
-
   override def depth: Int =
     1 + scala.math.max(left.depth, right.depth)
 
   override def isTerminal: Boolean = false
+
+  override def toString: String = s"($left ${op.name} $right)"
 }

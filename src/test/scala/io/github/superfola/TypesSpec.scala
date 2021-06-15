@@ -22,11 +22,13 @@ class TypesSpec extends AnyFlatSpec with Matchers {
   )
 
   "A simple tree" should "hold a node" in {
-    simpleTree.reduce should be(simpleTree)
     simpleTree.computed should be(12)
   }
   it should "have a depth of one" in {
     simpleTree.depth should be(1)
+  }
+  it should "be reduced to itself" in {
+    simpleTree.reduce should be(simpleTree)
   }
 
   "A bigger tree" should "hold many nodes" in {
@@ -37,5 +39,13 @@ class TypesSpec extends AnyFlatSpec with Matchers {
   }
   it should "have a value of 7" in {
     bigTree.computed should be(7)
+  }
+  it should "be reduced to the computation of its subnodes" in {
+    bigTree.reduce.toString should be(
+      Node[Int](
+        Operators.add,
+        Leaf(1),
+        Leaf(6)
+      ).toString)
   }
 }
