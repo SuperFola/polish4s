@@ -1,5 +1,7 @@
 package io.github.superfola
 
+import io.github.superfola.types._
+
 object Main extends App {
   def create: Tree[Int] =
     Node[Int](

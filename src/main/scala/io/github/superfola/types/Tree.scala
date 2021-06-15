@@ -1,7 +1,6 @@
-package io.github.superfola
+package io.github.superfola.types
 
-import math.Numeric
-import math.Numeric.Implicits._
+import scala.math.Numeric
 
 sealed trait Tree[A] {
   def computed: A

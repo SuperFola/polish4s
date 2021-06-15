@@ -1,7 +1,7 @@
-package io.github.superfola
+package io.github.superfola.types
 
-import math.Numeric
-import math.Numeric.Implicits._
+import scala.math.Numeric
+import scala.math.Numeric.Implicits._
 
 object Operators {
   def add[A: Numeric]: Operator[A] =
