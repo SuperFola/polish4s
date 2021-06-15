@@ -3,7 +3,7 @@ package io.github.superfola
 import io.github.superfola.types._
 
 object Main extends App {
-  def create: Tree[Int] =
+  def create: Tree =
     Node(
       Operators.add,
       Node(
@@ -18,10 +18,19 @@ object Main extends App {
       )
     )
 
-  val tree: Tree[Int] = create
+  val tree: Tree = create
 
   println(tree)
   println(tree.computed)
   println(tree.reduce)
   println(tree.reduce.reduce)
+
+  println("=======")
+
+  val testTree = tree.toPrefixNotation
+    .replace("(", "")
+    .replace(")", "")
+  println(testTree)
+
+  println(Parser(testTree))
 }

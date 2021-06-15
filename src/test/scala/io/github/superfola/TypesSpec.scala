@@ -6,13 +6,13 @@ import org.scalatest.matchers.should.Matchers
 import io.github.superfola.types._
 
 class TypesSpec extends AnyFlatSpec with Matchers {
-  val simpleTree: Tree[Int] = Leaf[Int](12)
-  val smallTree: Tree[Int] = Node(
+  val simpleTree: Tree = Leaf(12)
+  val smallTree: Tree = Node(
     Operators.sub,
     Leaf(1),
     Leaf(0)
   )
-  val bigTree: Tree[Int] = Node(
+  val bigTree: Tree = Node(
     Operators.add,
     Node(
       Operators.sub,
@@ -61,7 +61,7 @@ class TypesSpec extends AnyFlatSpec with Matchers {
   }
   it should "be reduced to the computation of its subnodes" in {
     bigTree.reduce.toString should be(
-      Node[Int](
+      Node(
         Operators.add,
         Leaf(1),
         Leaf(6)
