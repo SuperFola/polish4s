@@ -1,36 +1,15 @@
 package io.github.superfola
 
+import cats.effect.{ExitCode, IO, IOApp}
 import io.github.superfola.types._
 
-object Main extends App {
-  def create: Tree =
-    Node(
-      Operators.add,
-      Node(
-        Operators.sub,
-        Leaf(4),
-        Leaf(3)
-      ),
-      Node(
-        Operators.mul,
-        Leaf(3),
-        Leaf(2)
-      )
-    )
-
-  val tree: Tree = create
-
-  println(tree)
-  println(tree.computed)
-  println(tree.reduce)
-  println(tree.reduce.reduce)
-
-  println("=======")
-
-  val testTree = tree.toPrefixNotation
-    .replace("(", "")
-    .replace(")", "")
-  println(testTree)
-
-  println(Parser(testTree))
+object Main extends IOApp {
+  override def run(args: List[String]): IO[ExitCode] = {
+    if (args.length == 0) {
+      IO(println("Not enough arguments")) *> IO.pure(ExitCode.Error)
+    }
+    else {
+      IO(println(args(0))) *> IO.pure(ExitCode.Success)
+    }
+  }
 }
