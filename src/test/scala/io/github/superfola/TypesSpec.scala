@@ -7,6 +7,11 @@ import io.github.superfola.types._
 
 class TypesSpec extends AnyFlatSpec with Matchers {
   val simpleTree: Tree[Int] = Leaf[Int](12)
+  val smallTree: Tree[Int] = Node(
+    Operators.sub,
+    Leaf(1),
+    Leaf(0)
+  )
   val bigTree: Tree[Int] = Node(
     Operators.add,
     Node(
@@ -22,7 +27,7 @@ class TypesSpec extends AnyFlatSpec with Matchers {
   )
 
   "A simple tree" should "hold a node" in {
-    simpleTree.computed should be(12)
+    simpleTree.length should be(1)
   }
   it should "have a depth of one" in {
     simpleTree.depth should be(1)
@@ -31,8 +36,22 @@ class TypesSpec extends AnyFlatSpec with Matchers {
     simpleTree.reduce should be(simpleTree)
   }
 
-  "A bigger tree" should "hold many nodes" in {
+  "A small tree" should "hold two nodes" in {
+    smallTree.length should be(2)
+  }
+  it should "have a depth of 1" in {
+    smallTree.depth should be(2)
+  }
+  it should "be evaluated to (1 - 0)" in {
+    smallTree.toString should be("(1 - 0)")
+  }
+  it should "be reduced to 1" in {
+    smallTree.reduce should be(Leaf(1))
+  }
+
+  "A big tree" should "hold many nodes" in {
     bigTree.depth should be(3)
+    bigTree.length should be(4)
   }
   it should "be evaluated to ((4 - 3) + (3 * 2))" in {
     bigTree.toString should be("((4 - 3) + (3 * 2))")
@@ -46,6 +65,14 @@ class TypesSpec extends AnyFlatSpec with Matchers {
         Operators.add,
         Leaf(1),
         Leaf(6)
-      ).toString)
+      ).toString
+    )
+  }
+  it should "be possible to reduce the tree to a single leaf" in {
+    bigTree.reduce.reduce should be(Leaf(7))
+  }
+
+  "A big tree" should "have a prefix notation of (+ (- 4 3) (* 3 2))" in {
+    bigTree.toPrefixNotation should be("(+ (- 4 3) (* 3 2))")
   }
 }
